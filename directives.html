@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Directives</title>
+  </head>
+  <body>
+    <div id="app">
+      <label>Your name: </label>
+      <input type="text" v-model="name" />
+      <div v-if="show">
+        <h1>John is a marginal man.</h1>
+        <div>
+          v-on: <button v-on:click="count++">click</button>
+          count: {{ count }}
+          <div v-text="count"></div>
+          v-once: <div v-once>{{ count }}</div>
+          v-text: <div v-text="title"></div>
+          v-html: <div v-html="title"></div>
+          <h2>v-if</h2>
+          <div v-if="showText">You can't see me!</div>
+          <div v-else>John Cena!</div>
+          <div v-show="showText">You can still see me in DOM!</div>
+          <button v-on:click="showText = !showText">champion</button>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            name: '',
+            count: '0',
+            title: '<span>FAQ Nick</span>',
+            showText: false
+          };
+        },
+        computed: {
+          show() {
+            if (this.name == 'John') {
+              return false;
+            }
+            return true;
+          },
+        },
+      };
+
+      Vue.createApp(app).mount('#app');
+    </script>
+  </body>
+</html>

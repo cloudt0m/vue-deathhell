@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-if practice</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="content" />
+      <div>
+        computed:
+        <div v-if="inputReminder">{{ inputReminder }}</div>
+      </div>
+      <div>
+        v-show:
+        <div v-show="content.length == 0">請輸入文字</div>
+        <div v-show="content.length > 10">不得輸入超過10字</div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            content: '',
+          };
+        },
+        computed: {
+          inputReminder() {
+            if (this.content.length == 0) {
+              return '請輸入文字';
+            }
+            if (this.content.length > 10) {
+              return '不得輸入超過10字';
+            }
+            return false;
+          },
+        },
+      };
+
+      Vue.createApp(app).mount('#app');
+    </script>
+  </body>
+</html>

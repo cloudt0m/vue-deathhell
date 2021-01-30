@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue test</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="name" /> <br />
+      {{ name }} <br />
+      {{ greeting }} <br />
+      <input type="text" v-model="message" />
+      {{ reverseMessage }}
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            name: 'John',
+            message: '',
+          };
+        },
+        computed: {
+          greeting() {
+            return `Hello, ${this.name}`;
+          },
+          reverseMessage() {
+            return this.message.split('').reverse().join('');
+          },
+        },
+      };
+
+      Vue.createApp(app).mount('#app');
+    </script>
+  </body>
+</html>

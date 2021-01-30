@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue test</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <label for="twd">台幣: </label>
+        <input name="twd" type="text" v-model="twdData" />
+        <br />
+        <label for="jpy">日幣: </label>
+        <input name="jpy" type="text" v-model="jpyData" /> <br />
+        <div>台幣: {{ twdData }}</div>
+        <div>日幣: {{ jpyData }}</div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            twdData: 0,
+            rate: 0.27,
+          };
+        },
+        computed: {
+          jpyData: {
+            get() {
+              return this.twdData / this.rate;
+            },
+            set(val) {
+              this.twdData = val * this.rate;
+            },
+          },
+        },
+      };
+
+      Vue.createApp(app).mount('#app');
+    </script>
+  </body>
+</html>

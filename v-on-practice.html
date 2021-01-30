@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-on practice</title>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="count++">FAQ {{ count }} times</button>
+      <button @click="count++">FAQ {{ count }} times</button>
+      <button @click="addCount">FAQ {{ count }} times by methods</button>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            count: 0,
+          };
+        },
+        methods: {
+          addCount() {
+            this.count++;
+          }
+        }
+      };
+
+      Vue.createApp(app).mount('#app');
+    </script>
+  </body>
+</html>
+
+<style scoped>
+  button:not(last-child) {
+    margin-right: 0.5rem;
+  }
+</style>

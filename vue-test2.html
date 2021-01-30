@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue test</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="name" />
+      <div>FAQ, {{ name }}</div>
+      <div>{{ 'FAQ, ' + name }}</div>
+      <div>{{ welcome + ', ' + name }}</div>
+      <div>{{ count  + 6 }}</div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            welcome: 'Hello',
+            name: 'John',
+            count: 0
+          };
+        },
+      };
+
+      Vue.createApp(app).mount('#app');
+    </script>
+  </body>
+</html>
