@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>multiple class</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        transition: 0.4s;
+      }
+      .box.red {
+        background-color: red;
+      }
+      .box.circle {
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <transition name="box-transition">
+        <div class="box" :class="[redClass, circleClass]"></div>
+      </transition>
+      <button @click="toggleRed">toggle red</button>
+      <button @click="toggleCircle">toggle circle</button>
+      <button @click="reset">reset</button>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+
+  <script>
+    const app = {
+      data() {
+        return {
+          redClass: '',
+          circleClass: '',
+        };
+      },
+      methods: {
+        toggleRed() {
+          if (this.redClass === '') {
+            this.redClass = 'red';
+            return;
+          }
+          this.redClass = '';
+        },
+        toggleCircle() {
+          this.circleClass === ''
+            ? (this.circleClass = 'circle')
+            : (this.circleClass = '');
+        },
+        reset() {
+          this.redClass = '';
+          this.circleClass = '';
+        },
+      },
+    };
+
+    Vue.createApp(app).mount('#app');
+  </script>
+</html>

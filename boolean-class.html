@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>boolean class</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        transition: 0.4s;
+      }
+      .box.red {
+        background-color: red;
+      }
+      .box.circle {
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <transition name="box-transition">
+        <div class="box" :class="[{red: isRed}, {circle: isCircle}]"></div>
+      </transition>
+      <button @click="isRed = !isRed">toggle red</button>
+      <button @click="isCircle = !isCircle">toggle circle</button>
+      <button @click="reset">reset</button>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+
+  <script>
+    const app = {
+      data() {
+        return {
+          isRed: false,
+          isCircle: false,
+        };
+      },
+      methods: {
+        reset() {
+          this.isRed = false;
+          this.isCircle = false;
+        },
+      },
+    };
+
+    Vue.createApp(app).mount('#app');
+  </script>
+</html>

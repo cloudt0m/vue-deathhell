@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <title>v-for</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <div class="form-inline my-2">
+          <div class="form-group mr-2">
+            <label for="" class="">姓名</label>
+            <input type="text" v-model="userName" class="form-control" placeholder="請輸入姓名" />
+          </div>
+          <div class="form-group mr-2">
+            <label for="" class="">Email</label>
+            <input type="text" v-model="userEmail" class="form-control" placeholder="請輸入Email" />
+          </div>
+          <div class="form-group mr-2">
+            <label for="" class="">水果</label>
+            <input type="text" v-model="userFruit" class="form-control" placeholder="請輸入水果" />
+          </div>
+          <button type="button" class="btn btn-info" @click="addUser">
+            新增
+          </button>
+        </div>
+      </div>
+      <div class="container">
+        <table class="table table-bordered">
+          <thead>
+              <td>姓名</td>
+              <td>email</td>
+              <td>水果</td>
+              <td>操作</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(user, index) in users" :key="index">
+              <td>{{ user.userName }}</td>
+              <td>{{ user.userEmail }}</td>
+              <td>{{ user.userFruit }}</td>
+              <td><button class="btn btn-danger" @click="deleteUser(index)">刪除</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div v-for="user in users">
+          {{ user.name }}
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            userName: 'Tom',
+            userEmail: 'tom@faq.com',
+            userFruit: 'banana',
+            users: [],
+          };
+        },
+        methods: {
+          addUser() {
+            let newUser = {
+              userName: this.userName,
+              userEmail: this.userEmail,
+              userFruit: this.userFruit,
+            };
+            // this.users.push(newUser); // 新增資料到陣列的最後一筆
+            this.users.unshift(newUser); // 新增資料到陣列的第一筆
+            this.updateUsers();
+          },
+          deleteUser(index) {
+            this.users.splice(index, 1);
+            this.updateUsers();
+          },
+          updateUsers() {
+            localStorage.setItem("users", JSON.stringify(this.users))
+          }
+        },
+        mounted() {
+          const userData = localStorage.getItem("users")
+            this.users = JSON.parse(userData);
+
+          
+        }
+      };
+
+      Vue.createApp(app).mount('#app');
+    </script>
+  </body>
+  <style scoped>
+    .box {
+      margin-top: 0.5rem;
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+    }
+  </style>
+</html>

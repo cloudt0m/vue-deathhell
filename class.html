@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        transition: 0.4s;
+      }
+      .box.active {
+        background-color: red;
+      }
+      .box.circle {
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="box" :class="boxClass"></div>
+      <button @click="boxClass='active'">active</button>
+      <button @click="boxClass='circle'">circle</button>
+      <button @click="boxClass=''">reset</button>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+
+  <script>
+    const app = {
+      data() {
+        return {
+          boxClass: '',
+        };
+      },
+    };
+
+    Vue.createApp(app).mount('#app');
+  </script>
+</html>
