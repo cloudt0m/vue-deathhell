@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>transition - animate.css</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background: coral;
+        /* transition: 0.5s; */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="isShow = !isShow">toggle</button>
+      <transition
+        enter-active-class="animate__bounceIn"
+        leave-active-class="animate__bounceOut"
+        @enter="boxEnter"
+        @leave="boxLeave"
+      >
+        <div v-if="isShow" class="box animate__animated"></div>
+      </transition>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const app = {
+      data() {
+        return {
+          isShow: true,
+        };
+      },
+      methods: {
+        boxEnter() {
+          console.log('enter');
+        },
+        boxLeave() {
+          console.log('leave');
+        },
+      },
+    };
+
+    Vue.createApp(app).mount('#app');
+  </script>
+</html>

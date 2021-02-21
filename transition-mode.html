@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>transition mode</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background: coral;
+        transition: 0.5s;
+        display: inline-block;
+      }
+      .orange {
+        background: orange;
+      }
+      .v-enter-from {
+        transform: translateY(-20px) rotate(360deg);
+        opacity: 0;
+      }
+      /* .v-enter-active {
+      }
+      .v-enter-to {
+        transform: translateY(10px);
+      }
+      .v-leave-from {
+      } */
+      .v-leave-active {
+        transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+      }
+      .v-leave-to {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <button @click="isShow = !isShow">toggle</button>
+      </div>
+      <transition mode="out-in">
+        <div v-if="isShow" class="box"></div>
+        <div v-else class="box orange"></div>
+      </transition>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const app = {
+      data() {
+        return {
+          isShow: true,
+        };
+      },
+    };
+
+    Vue.createApp(app).mount('#app');
+  </script>
+</html>

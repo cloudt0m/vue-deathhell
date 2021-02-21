@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>style</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="box" :style="[styleObj, styleObj2]"></div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+
+  <script>
+    const app = {
+      data() {
+        return {
+          styleObj: {
+            background: 'red',
+            borderRadius: '10px',
+          },
+          styleObj2: {
+            width: '100px',
+            height: '100px',
+          },
+        };
+      },
+    };
+
+    Vue.createApp(app).mount('#app');
+  </script>
+</html>
+
