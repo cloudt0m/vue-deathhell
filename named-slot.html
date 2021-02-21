@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>slot</title>
+    <style>
+      .btn {
+        padding: 5px 20px;
+        margin: 5px;
+        background: slategray;
+        color: white;
+        border: none;
+        border-radius: 4px;
+      }
+      .btn:hover {
+        background: navy;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background: #ccc;
+      }
+      .card {
+        display: inline-block;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px #aaa;
+        width: 200px;
+      }
+      .card h2 {
+        font-size: 24px;
+        margin: 0;
+      }
+      .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <card title="from attribute">
+        <template v-slot:h2-content>title slot</template>
+        <template v-slot:slot-content>
+          content slot
+        </template>
+        <template v-slot:footer-content>footer slot</template>
+        you can see me in unnamed slot!
+      </card>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          titleData: 'from data()',
+        };
+      },
+    });
+
+    app.component('box', {
+      template: `<div class="box"></div>`
+    })
+
+    app.component('card', {
+      data() {
+        return {};
+      },
+      props: {
+        title: {
+          default: 'default title',
+          type: String,
+        },
+      },
+      template: `<div class="card">
+        <h2><slot name="h2-content"></slot></h2>
+        <slot name="slot-content"></slot>
+        <p><slot></slot></p>
+        <footer>
+          <slot name="footer-content"></slot>
+        </footer>          
+      </div>`,
+    });
+    app.mount('#app');
+  </script>
+</html>

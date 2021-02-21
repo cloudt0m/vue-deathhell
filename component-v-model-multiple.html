@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>component v-model</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <input type="text" v-model="inputValue" /> -->
+      <!-- <input type="text" :value="inputValue" @input="inputValue = $event.target.value"> -->
+
+      <custom-input v-model:first-name="firstName" v-model:last-name="lastName"></custom-input>
+      <div>
+        <p>{{ firstName }} {{ lastName }}</p>
+      </div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          firstName: 'john',
+          lastName: 'doe'
+        };
+      },
+    });
+
+    app.component('customInput', {
+      props: ['firstName', 'lastName'],
+      template: 
+      `<input type="text" :value="firstName" @input="$emit('update:firstName', $event.target.value)" />
+      <input type="text" :value="lastName" @input="$emit('update:lastName', $event.target.value)" />`,
+    });
+
+    app.mount('#app');
+  </script>
+</html>

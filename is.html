@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>is</title>
+    <style>
+      .box {
+        width: 100%;
+        height: 100px;
+        background: #ccc;
+      }
+      .links {
+        display: flex;
+        background: #ccc;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 10px;
+      }
+      .link {
+        border: 1px solid transparent;
+        padding: 6px 10px;
+        color: teal;
+        text-decoration: none;
+        cursor: pointer;
+        position: relative;
+        top: 1px;
+      }
+      .link.active {
+        background: white;
+        border: 1px solid #ccc;
+        border-bottom: 1px solid transparent;
+      }
+      .fade-enter-from {
+        opacity: 0;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: 0.5s;
+      }
+      .fade-leave-to {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="links">
+        <a
+          class="link"
+          v-for="(link, index) in links"
+          :key="index"
+          @click="componentName = link"
+          :class="{active: componentName == link}"
+          >{{ link }}</a
+        >
+      </div>
+      <transition name="fade" mode="out-in">
+        <keep-alive>
+          <component :is="componentName"></component>
+        </keep-alive>
+      </transition>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          links: ['about', 'shop', 'contact'],
+          componentName: 'shop',
+        };
+      },
+    });
+
+    app.component('about', {
+      template: `<div class="box">about</div>`,
+    });
+
+    app.component('shop', {
+      data() {
+        return {
+          enterTimes: 0,
+        };
+      },
+      template: `<div class="box"><p>shop</p>keepalive activated times: {{ enterTimes }}</div>`,
+      activated() {
+        this.enterTimes++;
+      },
+    });
+
+    app.component('contact', {
+      data() {
+        return {
+          count: 0,
+        };
+      },
+      template: `<div class="box"><p>contact</p><button @click="count++">count: {{ count }}</button></div>`,
+    });
+
+    app.mount('#app');
+  </script>
+</html>
