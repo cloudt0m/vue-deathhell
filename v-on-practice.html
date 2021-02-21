@@ -10,6 +10,10 @@
       <button v-on:click="count++">FAQ {{ count }} times</button>
       <button @click="count++">FAQ {{ count }} times</button>
       <button @click="addCount">FAQ {{ count }} times by methods</button>
+      <div>
+        <button @click="setUser('Nick')">set user</button>
+        {{ user }}
+      </div>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
@@ -17,11 +21,25 @@
         data() {
           return {
             count: 0,
+            user: '',
           };
         },
         methods: {
           addCount() {
             this.count++;
+          },
+          setUser(username) {
+            this.user = username;
+          },
+        },
+        computed: {
+          inputUser: {
+            get() {
+              return this.user
+            },
+            set(val) {
+              this.user = val
+            }
           }
         }
       };

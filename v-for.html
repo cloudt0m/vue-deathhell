@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-for</title>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="(user, index) in users" :key="user.id">
+          No. {{ index + 1 }} nora-usagi: {{ user.name }} likes {{ user.sport }}
+          <button @click="selectUser(index); userIndex = index">Get my age</button>
+        </li>
+      </ul>
+      
+      <div v-if="selectedUser">
+        {{ selectedUser.name }}'s age is {{ selectedUser.age }}
+      </div>
+
+      <div v-if="computedMessage">{{ computedMessage }}</div>
+      <hr />
+
+      <div>
+        <span v-for="n in 10">{{ n }}, </span>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            users: [
+              {
+                id: 1,
+                name: 'Tom',
+                sport: 'running',
+                age: 12,
+              },
+              {
+                id: 2,
+                name: 'Sue',
+                sport: 'jumping',
+                age: 18,
+              },
+              {
+                id: 3,
+                name: 'John',
+                sport: 'on-bed-sport',
+                age: 99,
+              },
+            ],
+            selectedUser: null,
+            userIndex: null,
+          };
+        },
+        methods: {
+          selectUser(index) {
+            this.selectedUser = this.users[index];
+          },
+        },
+        computed: {
+          computedMessage() {
+            if (this.userIndex != null) {
+              const user = this.users[this.userIndex];
+              return `${user.name}'s age is ${user.age}`;
+            }
+            return false;
+          },
+        },
+      };
+
+      Vue.createApp(app).mount('#app');
+    </script>
+  </body>
+  <style scoped>
+    .box {
+      margin-top: 0.5rem;
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+    }
+  </style>
+</html>

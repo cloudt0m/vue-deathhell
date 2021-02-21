@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-bind</title>
+  </head>
+  <body>
+    <div id="app">
+      <div><input type="text" v-model="title" /></div>
+      <button
+        v-bind:disabled="isDisabled"
+        v-on:click="toggleDisabled"
+        :class="title"
+      >
+        click
+      </button>
+      <hr />
+      <div>
+        <input type="checkbox" v-model="hasAgreed">
+        我同意<br />
+        <button :disabled="!hasAgreed">註冊</button>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            isDisabled: false,
+            title: 'FAQ',
+            hasAgreed: false
+          };
+        },
+        methods: {
+          toggleDisabled() {
+            this.isDisabled = !this.isDisabled;
+          },
+        },
+      };
+
+      Vue.createApp(app).mount('#app');
+    </script>
+  </body>
+</html>
+
+<style scoped>
+  button:not(last-child) {
+    margin-right: 0.5rem;
+  }
+  button.red {
+    background: red;
+  }
+</style>

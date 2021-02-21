@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-on modifiers</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <h4>
+          v-on.stop - stopPropagation(), <br />you can't toggle the box without
+          .stop modifier
+        </h4>
+        <div @click="clickOnDiv">
+          <button @click.stop="clickOnButton">FAQ me!</button>
+          <div v-show="showBox" class="box"></div>
+        </div>
+      </div>
+
+      <div>
+        <h4>
+          v-on.prevent - preventDefault(),<br />'#app' won't append to the route
+        </h4>
+        <a href="#app" @click="linkToWhatever">link to whatever</a>
+      </div>
+
+      <div>
+        <h4>v-on.once - trigger only once</h4>
+        <button @click.once="addCount">{{ count }}</button>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            showBox: true,
+            count: 0
+          };
+        },
+        methods: {
+          clickOnDiv() {
+            console.log('div click event');
+            this.showBox = !this.showBox;
+          },
+          clickOnButton() {
+            console.log('button click event');
+            this.showBox = !this.showBox;
+          },
+          linkToWhatever() {
+            console.log('not really links')
+          },
+          addCount() {
+            this.count++;
+          }
+        },
+      };
+
+      Vue.createApp(app).mount('#app');
+    </script>
+  </body>
+  <style scoped>
+    .box {
+      margin-top: 0.5rem;
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+    }
+  </style>
+</html>

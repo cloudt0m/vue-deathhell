@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-model</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="number" v-model.number="number[0]" />
+      <span> + </span>
+      <input type="number" v-model.number="number[1]" />
+      <span> = </span>
+      <span>{{ total }}</span> <br />
+      <button @click="count">count by methods</button>
+      {{ resultOnClick }}
+      <!-- 使用 methods: {} 時要加() -->
+      <hr />
+      <div>
+        <div>台幣：<input type="number" v-model="twd" /></div>
+        <div>日幣：<input type="number" v-model="jpy" /></div>
+        <button @click="convertToJpy">轉換</button>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            number: [0, 0],
+            resultOnClick: 0,
+            twd: 0,
+            jpy: 0,
+          };
+        },
+        computed: {
+          total() {
+            // return Number(this.firstNumber) + Number(this.secondNumber);
+            return this.number.reduce((prev, curr) => prev + curr);
+          },
+        },
+        methods: {
+          count() {
+            this.resultOnClick = this.number.reduce(
+              (prev, curr) => prev + curr
+            );
+          },
+          convertToJpy() {
+            const rate = 0.27;
+            this.jpy = this.twd / rate;
+          },
+        },
+      };
+
+      Vue.createApp(app).mount('#app');
+    </script>
+  </body>
+</html>

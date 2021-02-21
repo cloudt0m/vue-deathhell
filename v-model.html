@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-model</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="msg" /> <br />
+      <div>message: {{ msg }}</div>
+      <hr />
+      <div>
+        <input type="checkbox" v-model="isChecked" />
+        <div>is checked? {{ isChecked }}</div>
+      </div>
+      <hr />
+      <div>
+        <label
+          ><input type="checkbox" value="apple" v-model="fruit" />apple</label
+        >
+        <label
+          ><input type="checkbox" value="banana" v-model="fruit" />banana</label
+        >
+        <label
+          ><input type="checkbox" value="peach" v-model="fruit" />peach</label
+        >
+        <div>{{ fruit }}</div>
+        <div>共選擇{{fruit.length}}樣水果</div>
+      </div>
+      <hr />
+      <div>
+        <select v-model="city">
+          <option value="" default disabled>請選擇城市</option>
+          <option value="taipei">台北市</option>
+          <option value="new-taipei">新北市</option>
+          <option value="taoyuan">桃園市</option>
+        </select>
+        <div>{{ city }}</div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            msg: '',
+            isChecked: false,
+            fruit: [],
+            city: '',
+          };
+        },
+      };
+
+      Vue.createApp(app).mount('#app');
+    </script>
+  </body>
+</html>
+
+<style scoped>
+  button:not(last-child) {
+    margin-right: 0.5rem;
+  }
+  button.red {
+    background: red;
+  }
+</style>
