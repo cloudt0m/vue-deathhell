@@ -3,7 +3,8 @@
     <!-- Use History.pushState() to modify browser url -->
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
-    <router-link to="/test/1">Test</router-link>
+    <router-link to="/test/1">Test</router-link> | 
+    <router-link to="/composition">Composition</router-link>
   </div>
   <router-view/>
 </template>
