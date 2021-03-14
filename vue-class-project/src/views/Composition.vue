@@ -16,11 +16,14 @@
       {{ count }}
     </div>
     <div class="text-center">{{ computedString }}</div>
+    <hr>
+    posX: {{ posX }} | posY: {{ posY }}
   </div>
 </template>
 
 <script>
 import { ref, reactive, computed, onMounted } from "vue";
+import getMousePosition from '@/utilities/mouse.js';
 
 export default {
   setup() {
@@ -29,6 +32,9 @@ export default {
       x: 0,
       y: 8,
     });
+
+    const { posX, posY } = getMousePosition()
+
     // reactive variable need to be an object
     const count = ref(0);
 
@@ -55,6 +61,8 @@ export default {
       count,
       addCount,
       computedString,
+      posX,
+      posY
     };
   },
 };
