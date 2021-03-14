@@ -30,6 +30,16 @@ const routes = [
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
+    path: '/vuex',
+    name: 'Vuex',
+    component: () => import('../views/Vuex.vue'),
+  },
+  {
+    path: '/axios',
+    name: 'Axios',
+    component: () => import('../views/Axios.vue'),
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: NotFound,
