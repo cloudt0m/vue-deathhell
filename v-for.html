@@ -9,7 +9,7 @@
     <div id="app">
       <ul>
         <li v-for="(user, index) in users" :key="user.id">
-          No. {{ index + 1 }} nora-usagi: {{ user.name }} likes {{ user.sport }}
+          No. {{ index + 1 }} user: {{ user.name }} likes {{ user.sport }}
           <button @click="selectUser(index); userIndex = index">Get my age</button>
         </li>
       </ul>
@@ -46,7 +46,7 @@
               {
                 id: 3,
                 name: 'John',
-                sport: 'on-bed-sport',
+                sport: 'any-sport',
                 age: 99,
               },
             ],

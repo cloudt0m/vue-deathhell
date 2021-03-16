@@ -13,7 +13,7 @@ export default {
       },
       {
         id: 3,
-        name: 'Dick',
+        name: 'Duke',
         age: 101,
       },
     ],
